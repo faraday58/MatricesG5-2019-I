@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbMatriz1 = new System.Windows.Forms.Label();
             this.lbMatriz2 = new System.Windows.Forms.Label();
             this.txtbEntrada = new System.Windows.Forms.TextBox();
@@ -35,6 +36,8 @@
             this.btnRestar = new System.Windows.Forms.Button();
             this.btnMultiplicar = new System.Windows.Forms.Button();
             this.btnEntrada = new System.Windows.Forms.Button();
+            this.errorproEntrada = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorproEntrada)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMatriz1
@@ -100,6 +103,10 @@
             this.btnEntrada.UseVisualStyleBackColor = true;
             this.btnEntrada.Click += new System.EventHandler(this.btnEntrada_Click);
             // 
+            // errorproEntrada
+            // 
+            this.errorproEntrada.ContainerControl = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +121,7 @@
             this.Controls.Add(this.lbMatriz1);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.errorproEntrada)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,6 +136,7 @@
         private System.Windows.Forms.Button btnRestar;
         private System.Windows.Forms.Button btnMultiplicar;
         private System.Windows.Forms.Button btnEntrada;
+        private System.Windows.Forms.ErrorProvider errorproEntrada;
     }
 }
 

@@ -16,17 +16,41 @@ namespace MatricesG5_2019_I
 
         private void btnEntrada_Click(object sender, EventArgs e)
         {
-            m1 = Unidimensional.Leer(txtbEntrada.Text);
-            lbMatriz1.Text = m1.ToString(); ;
-            txtbEntrada.Clear();
+            try
+            {
+                m1 = Unidimensional.Leer(txtbEntrada.Text);
+                lbMatriz1.Text = m1.ToString(); ;
+                txtbEntrada.Clear();
+                errorproEntrada.Clear();
+            }
+            catch(FormatException error)
+            {
+                errorproEntrada.SetError(txtbEntrada, error.Message);
+            }
+            
         }
 
         private void btnSumar_Click(object sender, EventArgs e)
         {
-            m2 = Unidimensional.Leer(txtbEntrada.Text);
-            m3 = m1 + m2;
-            lbMatriz2.Text = m3.ToString();
-            txtbEntrada.Clear();
+            try
+               {
+                m2 = Unidimensional.Leer(txtbEntrada.Text);
+                if( m1.N != m2.N)
+                 {
+                    string error = "Las matrices deben ser conformables";
+                    throw new ApplicationException(error);
+                 }
+                    m3 = m1 + m2;
+                    lbMatriz2.Text = m3.ToString();
+                errorproEntrada.Clear();
+                    txtbEntrada.Clear();
+                }
+            catch(ApplicationException error)
+            {
+                errorproEntrada.SetError(txtbEntrada, error.Message);
+
+            }
+            
         }
     }
 }
