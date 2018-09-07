@@ -9,6 +9,11 @@ namespace MatricesG5_2019_I
         Unidimensional m1;
         Unidimensional m2;
         Unidimensional m3;
+
+        Multidimensional mu1;
+        Multidimensional mu2;
+        Multidimensional mu3;
+
         public Form1()
         {
             InitializeComponent();
@@ -18,12 +23,24 @@ namespace MatricesG5_2019_I
         {
             try
             {
-                m1 = Unidimensional.Leer(txtbEntrada.Text);
-                lbMatriz1.Text = m1.ToString(); ;
+
+                if (txtbEntrada.Text.Contains(";"))
+                {
+                    mu1 = Multidimensional.Leer(txtbEntrada.Text);
+                    lbMatriz1.Text = mu1.ToString();
+
+                }
+                else
+                {
+                    m1 = Unidimensional.Leer(txtbEntrada.Text);
+                    lbMatriz1.Text = m1.ToString(); ;
+                }
                 txtbEntrada.Clear();
                 errorproEntrada.Clear();
+
+
             }
-            catch(FormatException error)
+            catch (FormatException error)
             {
                 errorproEntrada.SetError(txtbEntrada, error.Message);
             }
@@ -34,21 +51,37 @@ namespace MatricesG5_2019_I
         {
             try
                {
-                m2 = Unidimensional.Leer(txtbEntrada.Text);
-                if( m1.N != m2.N)
-                 {
-                    string error = "Las matrices deben ser conformables";
-                    throw new ApplicationException(error);
-                 }
+                if( txtbEntrada.Text.Contains(";") &&   lbMatriz1.Text.Contains("\n")  )
+                {
+                    mu2 = Multidimensional.Leer(txtbEntrada.Text);
+                    mu3 = mu1 + mu2;
+                    lbMatriz2.Text = mu3.ToString();
+
+                }
+                else
+                {
+                    m2 = Unidimensional.Leer(txtbEntrada.Text);
+                    if (m1.N != m2.N)
+                    {
+                        string error = "Las matrices deben ser conformables";
+                        throw new ApplicationException(error);
+                    }
                     m3 = m1 + m2;
                     lbMatriz2.Text = m3.ToString();
-                errorproEntrada.Clear();
-                    txtbEntrada.Clear();
+                    
                 }
+                errorproEntrada.Clear();
+                txtbEntrada.Clear();
+            }
+                
             catch(ApplicationException error)
             {
                 errorproEntrada.SetError(txtbEntrada, error.Message);
 
+            }
+            catch(FormatException error)
+            {
+                errorproEntrada.SetError(txtbEntrada, error.Message);
             }
             
         }
