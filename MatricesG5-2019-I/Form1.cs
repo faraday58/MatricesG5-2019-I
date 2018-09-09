@@ -39,7 +39,11 @@ namespace MatricesG5_2019_I
             {
                 errorProv.SetError(txtbEntrada, error.Message);
             }
-             
+            catch (IndexOutOfRangeException)
+            {
+                errorProv.SetError(txtbEntrada, "Error al introducir la matriz");
+            }
+
             txtbEntrada.Clear();
         }
 
@@ -47,10 +51,17 @@ namespace MatricesG5_2019_I
         {
             try
             {
+
+                if(mu1 == null)
+                {
+                    throw new ApplicationException("Ingrese una matriz de inicio");
+                }
+
                 if (txtbEntrada.Text.Contains(";"))
                 {
                     mu2 = Multidimensional.Leer(txtbEntrada.Text);
-                    if((mu1.N != mu2.N) || (mu1.M != mu2.M))
+
+                    if((mu1.N != mu2.N) && (mu1.M != mu2.M))
                     {
 
                         throw new ApplicationException("Error de dimensión");
@@ -61,6 +72,11 @@ namespace MatricesG5_2019_I
                 }
                 else {
                     m2 = Unidimensional.Leer(txtbEntrada.Text);
+                    if( m1 == null )
+                    {
+                        throw new ApplicationException("Error de dimensión");
+                    }
+
                     if (m1.N != m2.N)
                     {
                         throw new ApplicationException("Error de dimesión!!!");
@@ -80,6 +96,10 @@ namespace MatricesG5_2019_I
             {
 
                 errorProv.SetError(txtbEntrada, error.Message);
+            }
+            catch(IndexOutOfRangeException )
+            {
+                errorProv.SetError(txtbEntrada, "Error al introducir la matriz");
             }
             
             txtbEntrada.Clear();
